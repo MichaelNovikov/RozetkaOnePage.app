@@ -1,6 +1,8 @@
 ﻿using Foundation;
 using Prism;
 using Prism.Ioc;
+using RozetkaOnePage.app.iOS.Services;
+using RozetkaOnePage.app.Services;
 using UIKit;
 
 
@@ -32,7 +34,7 @@ namespace RozetkaOnePage.app.iOS
     {
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            // Register any platform specific implementations
+            containerRegistry.Register<IStatusBarColor, StatusBarColor>();
         }
     }
 }
