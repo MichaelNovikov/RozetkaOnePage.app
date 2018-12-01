@@ -1,4 +1,5 @@
-﻿using Prism;
+﻿using DLToolkit.Forms.Controls;
+using Prism;
 using Prism.Ioc;
 using RozetkaOnePage.app.Services;
 using RozetkaOnePage.app.ViewModels;
@@ -23,7 +24,11 @@ namespace RozetkaOnePage.app
         protected override async void OnInitialized()
         {
             InitializeComponent();
+            FlowListView.Init();
 
+#if DEBUG
+            LiveReload.Init();
+#endif
             await NavigationService.NavigateAsync("NavigationPage/MainView");
         }
 

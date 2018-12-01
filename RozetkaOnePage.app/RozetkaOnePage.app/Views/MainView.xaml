@@ -34,7 +34,6 @@
                 CornerRadius="14">
             <control:CustomSearchBar 
                 Margin="0,0,10,0"
-                Grid.Row="0"
                 Placeholder="Я ищу..."
                 PlaceholderColor="Gray"
                 TextColor="Black"
@@ -79,8 +78,10 @@
                                 TextColor="#6C8DA1"/>
                             <Image
                                 Source="rightArrow"
-                                HeightRequest="45"
-                                VerticalOptions="EndAndExpand"/>
+                                HeightRequest="12"
+                                Margin="0,0,2,0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="EndAndExpand"/>
                         </StackLayout>
                         <Grid
                             BackgroundColor="White">
@@ -109,16 +110,37 @@
                                 Source="{Binding Image}">
                             </Image>
 
+                            <Frame
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Margin="14,12,0,0"
+                                Padding="0"
+                                HasShadow="False"
+                                BackgroundColor="Orange"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Start"
+                                HeightRequest="28"
+                                CornerRadius="20">
+                                <Label
+                                    VerticalOptions="CenterAndExpand"
+                                    FontSize="12"
+                                    FontAttributes="Bold"
+                                    Text="ТОП ПРОДАЖ"
+                                    Margin="16,5,16,5"
+                                    TextColor="White"/>
+                            </Frame>
+
                             <Image
                                 Grid.Row="1"
                                 Grid.Column="0"
-                                Margin="6,0,0,0"
+                                Margin="0,0,0,0"
                                 Source="ratingFive"
                                 HeightRequest="45"
                                 VerticalOptions="CenterAndExpand"/>
                             <Label
                                 Text="157 oтзывов"
-                                Margin="0,0,0,1"
+                                Margin="-5,0,0,1"
                                 TextColor="Gray"
                                 FontSize="Micro"
                                 Grid.Row="1"
@@ -157,9 +179,6 @@
                                 HorizontalOptions="StartAndExpand"
                                 CornerRadius="1">
                                 <Label
-                                    Grid.Row="3"
-                                    Grid.Column="0"
-                                    Grid.ColumnSpan="2"
                                     Margin="5,4,4,5"
                                     Text="20 500 грн"
                                     TextColor="#3B393A"/>
