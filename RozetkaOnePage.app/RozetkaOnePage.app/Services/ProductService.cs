@@ -1,23 +1,24 @@
 ﻿using RozetkaOnePage.app.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace RozetkaOnePage.app.Services
 {
-    public class ProductCellService : IProductCellService
+    public class ProductService : IProductService
     {
         private List<ProductModel> _products;
 
-        public ProductCellService()
+        public ProductService()
         {
             _products = new List<ProductModel>
             {
                 new ProductModel
                 {
                     Name = "Ноутбук Lenovo IdeaPad 330-151KBR",
-                    ProductCategory = ProductCategory.Laptops,
-                    ProductLabel = ProductLabel.TopSales,
+                    ProductCategorySetter = ProductCategory.Laptops,
+                    ProductLabelSetter = ProductLabel.TopSales,
                     Feedback = new List<string>{"","","","","","","",""},
                     Image = "notebook",
                     Price = 17499,
@@ -26,8 +27,8 @@ namespace RozetkaOnePage.app.Services
                  new ProductModel
                 {
                     Name = "Samsung Galaxy J6 2/32GB Black (SM-J600FZKDSEK)",
-                    ProductCategory = ProductCategory.CellРhones,
-                    ProductLabel = ProductLabel.SuperPrice,
+                    ProductCategorySetter = ProductCategory.CellРhones,
+                    ProductLabelSetter = ProductLabel.SuperPrice,
                     Feedback = new List<string>{"","","","","","","","","","","","","","","",
                         "","","","","","","","","","","","","","","","","","","","","","","",""},
                     Image = "smBlack",
@@ -37,8 +38,8 @@ namespace RozetkaOnePage.app.Services
                  new ProductModel
                 {
                     Name = "Планшет Asus ZenPad 3S 10 4/64GB",
-                    ProductCategory = ProductCategory.Tablets,
-                    ProductLabel = ProductLabel.TopSales,
+                    ProductCategorySetter = ProductCategory.Tablets,
+                    ProductLabelSetter = ProductLabel.TopSales,
                     Feedback = new List<string>{"","","","","","","","","","","","","","","","","","","","","","","",""},
                     Image = "asus",
                     Price = 9499,
@@ -47,14 +48,19 @@ namespace RozetkaOnePage.app.Services
             };
         }
 
-        public List<ProductModel> GetProductCells()
+        public List<ProductModel> GetProducts()
         {
             return _products;
         }
 
-        public ProductModel GetUserById(Guid id)
+        public ProductModel GetProductById(Guid id)
         {
             return _products.Find(z => z.Id == id);
+        }
+
+        public List<ProductModel> GetProductsByName(string name)
+        {
+            return _products.FindAll(p => p.Name.ToLowerInvariant().StartsWith(name.ToLowerInvariant()));
         }
     }
 }

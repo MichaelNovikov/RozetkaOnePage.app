@@ -37,7 +37,8 @@ namespace RozetkaOnePage.app
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
             containerRegistry.RegisterForNavigation<ProductDetailView, ProductDetailViewModel>();
-            containerRegistry.RegisterSingleton<IProductCellService, ProductCellService>();
+            containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
+            containerRegistry.RegisterSingleton<IProductService, ProductService>();
         }
     }
 }

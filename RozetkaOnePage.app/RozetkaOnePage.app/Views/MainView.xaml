@@ -4,6 +4,7 @@
              x:Class="RozetkaOnePage.app.Views.MainView"
              xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
              xmlns:control="clr-namespace:RozetkaOnePage.app.CustomControls"
+             xmlns:behaviors="clr-namespace:RozetkaOnePage.app.CustomControls"
              Title="{Binding Title}"
               x:Name="MyPage">
 
@@ -31,14 +32,19 @@
                 Margin="15,5,15,15"
                 Padding="0"
                 BackgroundColor="White"
-                CornerRadius="14">
-            <control:CustomSearchBar 
-                Margin="0,0,10,0"
-                Placeholder="Я ищу..."
-                PlaceholderColor="Gray"
-                TextColor="Black"
+            HeightRequest="35"
+                CornerRadius="10">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding TabSearchBarCommand}"/>
+            </Frame.GestureRecognizers>
+            <Label
+                Text ="Я ищу..."
+                TextColor="Gray"
                 BackgroundColor="Transparent"
-                HorizontalOptions="FillAndExpand"/>
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center">
+            </Label>
         </Frame>
 
         <flv:FlowListView
@@ -56,6 +62,7 @@
                         Margin="12,4,0,8"
                         FontSize="Medium"
                         TextColor="#3B393A"
+                        
                         BackgroundColor="Transparent"/>
                 </DataTemplate>
             </flv:FlowListView.HeaderTemplate>
@@ -71,7 +78,7 @@
                             Margin="0,0,0,-5"
                             HeightRequest="55">
                             <Label
-                                Text="Категория"
+                                Text="{Binding ProductCategoryGetter}"
                                 FontSize="Medium"
                                 Margin="7,0,0,0"
                                 VerticalOptions="Center"
@@ -125,10 +132,14 @@
                                 <Label
                                     VerticalOptions="CenterAndExpand"
                                     FontSize="12"
-                                    FontAttributes="Bold"
-                                    Text="ТОП ПРОДАЖ"
+                                    FontAttributes="Bold"                                
                                     Margin="16,5,16,5"
-                                    TextColor="White"/>
+                                    TextColor="White"
+                                    Text="{Binding ProductLabelGetter}">
+                                    <!--<Label.Behaviors>
+                                        <behaviors:CustomBehavior ProdCategory="{Binding ProductCategory}"/>
+                                    </Label.Behaviors>-->
+                                </Label>
                             </Frame>
 
                             <Image
@@ -146,18 +157,17 @@
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 VerticalOptions="CenterAndExpand"/>
-
                             <Label
                                 Grid.Row="2"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="2"
                                 Margin="7,-20,0,0"
-                                Text="Название товара"
+                                Text="{Binding Name}"
                                 TextColor="#6C8DA1"/>
                             <ContentView
                                 Grid.Row="3"
                                 Grid.Column="0"
-                                Margin="12,4,0,-2"
+                                Margin="12,3,0,0"
                                 HeightRequest="1.5"
                                 VerticalOptions="CenterAndExpand"
                                 BackgroundColor="Red"/>
@@ -166,7 +176,7 @@
                                 Grid.Column="0"
                                 
                                 Margin="12,0,0,0"
-                                Text="19 500 грн"
+                                Text="{Binding PreviousPrice, StringFormat='{0} грн'}"
                                 TextColor="Gray"/>
                             <Frame
                                 Grid.Row="4"
@@ -180,7 +190,7 @@
                                 CornerRadius="1">
                                 <Label
                                     Margin="5,4,4,5"
-                                    Text="20 500 грн"
+                                    Text="{Binding Price, StringFormat='{0} грн'}"
                                     TextColor="#3B393A"/>
                             </Frame>
                         </Grid>

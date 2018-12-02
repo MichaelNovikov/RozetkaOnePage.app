@@ -15,15 +15,15 @@ namespace RozetkaOnePage.app.ViewModels
     public class MainViewModel : ViewModelBase
     {
         IStatusBarColor _statusBarColor;
-        IProductCellService _productCellService;
+        IProductService _productService;
 
-        public MainViewModel(INavigationService navigationService, IStatusBarColor statusBarColor, IProductCellService productCellService)
+        public MainViewModel(INavigationService navigationService, IStatusBarColor statusBarColor, IProductService productService)
             : base(navigationService)
         {
             Title = "ROZETKA";
 
             _statusBarColor = statusBarColor;
-            _productCellService = productCellService;
+            _productService = productService;
         }
 
         #region — Public properties —
@@ -38,6 +38,9 @@ namespace RozetkaOnePage.app.ViewModels
             }
         }
 
+        private ICommand _tabSearchBar;
+        public ICommand TabSearchBarCommand => _tabSearchBar ?? (_tabSearchBar = new Command(OnTabSearchBarCommand));
+
         private ICommand _selectedItemCommand;
         public ICommand SelectedItemCommand => _selectedItemCommand ?? (_selectedItemCommand = new Command<Guid>(OnSelectedItemCommand));
 
@@ -48,8 +51,15 @@ namespace RozetkaOnePage.app.ViewModels
             base.OnNavigatedTo(parameters);
             _statusBarColor.SetColor("#00A046");
 
-            Products = _productCellService.GetProductCells();
+            Products = _productService.GetProducts();
         }
+
+
+        private async void OnTabSearchBarCommand()
+        {
+            await NavigationService.NavigateAsync("SearchView");
+        }
+
 
         private async void OnSelectedItemCommand(Guid id)
         {

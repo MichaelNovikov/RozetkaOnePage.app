@@ -1,4 +1,5 @@
 ﻿using Prism.Navigation;
+using RozetkaOnePage.app.Models;
 using RozetkaOnePage.app.Services;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,9 @@ namespace RozetkaOnePage.app.ViewModels
 {
     class ProductDetailViewModel : ViewModelBase
     {
-        IProductCellService _productCellService;
+        IProductService _productCellService;
 
-        public ProductDetailViewModel(INavigationService navigationService, IProductCellService productCellService)
+        public ProductDetailViewModel(INavigationService navigationService, IProductService productCellService)
             : base(navigationService)
         {
             _productCellService = productCellService;
@@ -32,7 +33,7 @@ namespace RozetkaOnePage.app.ViewModels
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
             var userId = parameters.GetValue<Guid>("Id");
-            var user = _productCellService.GetUserById(userId);
+            var user = _productCellService.GetProductById(userId);
             Image = user.Image;
         }
 
